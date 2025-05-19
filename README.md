@@ -60,6 +60,6 @@ NEXT_PUBLIC_BASE_API=https://core-main-lgmkhu.laravel.cloud/assessment
 
 ```bash
 git clone https://github.com/Catherine-Anokwuru/ensake.git
-cd ensake-app
+cd ensake
 npm install
 npm run dev
