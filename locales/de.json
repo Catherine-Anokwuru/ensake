@@ -1,0 +1,11 @@
+{
+  "Login.heading": "Melden Sie sich bei Ihrem Konto an",
+  "Login.subheading": "Geben Sie Ihre Daten ein, um sich anzumelden.",
+  "Login.email": "E-Mail-Adresse",
+  "Login.password": "Passwort",
+  "Login.forgot": "Passwort vergessen?",
+  "Login.keep": "Angemeldet bleiben",
+  "Login.button": "Anmelden",
+  "Login.registerPrompt": "Sie haben noch kein Konto?",
+  "Login.registerLink": "Registrieren"
+}

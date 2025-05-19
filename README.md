@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+---
 
-First, run the development server:
+### Authentication
+The API functionality is written in a utils file (/src/utils/api.ts) and called whenever API functionality is needed.
+
+- On first load, a unique device ID is generated.
+- This ID is persisted in localStorage under the key ensake-device-id.
+- On subsequent loads, the stored ID is reused to maintain device consistency.
+- This header is automatically included in all authenticated API requests.
+
+User login is handled via a POST /login request. On successful authentication:
+- A token is stored in localStorage under ensake-token
+- The token’s expiry timestamp is saved as ensake-token-expiry
+- A "keep me logged in" flag is saved if selected
+- On success, user is redirected to the rewards page.
+
+---
+
+### State Management
+Valtio and localStorage are used for state management. The user name and email are stored in a Valtio store and updated in localStorage to persist state across reloads.
+
+---
+
+### Session Handling
+
+A custom `useSessionManager()` hook manages:
+
+- Token and expiry are saved in `localStorage` as:
+  - `ensake-token`
+  - `ensake-token-expiry`
+  - `ensake-keep-logged-in`
+- Token expiry: token expires after 5 minutes (or 7 days if "Keep me logged in" is set)
+- Auto logout on idle: the user is logged out if page is idle for over 5 minutes
+- Clears all sensitive data and redirects to the login page on session expiry
+
+NB - This doesn't reflect on rewards page as the token expires after 5 minutes and logs the user out, this is solved if a refresh token is provided from the backend.
+
+---
+
+### Localization setup
+
+This app supports localized routing using Next.js App Router with dynamic segments.
+Currently, the app supports:
+en – English
+de – German
+These are configured in the [locale] dynamic route and handled through layout validation.
+This is currently implemented only on the login page.
+Visiting /en/login renders the login page in English, while /de/login renders the German version.
+
+---
+
+## Environment Variable
+
+NEXT_PUBLIC_BASE_API=https://core-main-lgmkhu.laravel.cloud/assessment
+
+---
+
+## 📦 Installation
 
 ```bash
+git clone https://github.com/Catherine-Anokwuru/ensake.git
+cd ensake-app
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

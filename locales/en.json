@@ -1,0 +1,11 @@
+{
+  "Login.heading": "Login to your account",
+  "Login.subheading": "Enter your details to login.",
+  "Login.email": "Email address",
+  "Login.password": "Password",
+  "Login.forgot": "Forgot password?",
+  "Login.keep": "Keep me logged in",
+  "Login.button": "Login",
+  "Login.registerPrompt": "Don't have an account?",
+  "Login.registerLink": "Register"
+}
