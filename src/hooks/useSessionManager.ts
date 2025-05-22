@@ -33,7 +33,7 @@ export const useSessionManager = () => {
     const keepLoggedIn =
       localStorage.getItem("ensake-keep-logged-in") === "true";
     const ttl = keepLoggedIn
-      ? 7 * 24 * 60 * 60 * 1000
+      ? 3 * 24 * 60 * 60 * 1000
       : 5 * 60 * 1000;
 
     if (token) {
